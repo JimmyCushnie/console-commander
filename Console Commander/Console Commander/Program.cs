@@ -70,7 +70,14 @@ namespace ConsoleCommander
             for (int i = 0; i < split.Count; i++)
                 bois[i] = Parser.Parse(split[i], parameters[i].ParameterType);
 
-            method.Invoke(null, bois);
+            try
+            {
+                method.Invoke(null, bois);
+            }
+            catch(Exception e)
+            {
+                throw e.InnerException;
+            }
         }
     }
 
