@@ -11,7 +11,7 @@ namespace Console_Commander
     /// </summary>
     static class CC
     {
-        static void Write(object value, ConsoleColor color = ConsoleColor.Cyan)
+        public static void Write(object value, ConsoleColor color = ConsoleColor.Cyan)
         {
             var original = Console.ForegroundColor;
             Console.ForegroundColor = color;
@@ -19,12 +19,17 @@ namespace Console_Commander
             Console.ForegroundColor = original;
         }
 
-        static void WriteLine(object value, ConsoleColor color = ConsoleColor.Cyan)
+        public static void WriteLine(object value, ConsoleColor color = ConsoleColor.Cyan)
         {
             var original = Console.ForegroundColor;
             Console.ForegroundColor = color;
             Console.WriteLine(value);
             Console.ForegroundColor = original;
+        }
+
+        public static void LineBreak()
+        {
+            Console.WriteLine();
         }
     }
 }
