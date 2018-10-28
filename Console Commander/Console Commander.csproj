@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Console Commander\Parser.cs" />
     <Compile Include="Console Commander\RegisterCommandAttribute.cs" />
     <Compile Include="Console Commander\CC.cs" />
     <Compile Include="Console Commander\DefaultCommands.cs" />

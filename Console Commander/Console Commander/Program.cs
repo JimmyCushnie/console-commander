@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.Globalization;
 
-namespace Console_Commander
+namespace ConsoleCommander
 {
     class Program
     {
@@ -35,7 +36,7 @@ namespace Console_Commander
         }
 
 
-        static Dictionary<string, MethodInfo> RegisteredCommands = new Dictionary<string, MethodInfo>();
+        public static Dictionary<string, MethodInfo> RegisteredCommands { get; private set; } = new Dictionary<string, MethodInfo>();
         static void RegisterCommands()
         {
             var methodFlags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
@@ -58,7 +59,21 @@ namespace Console_Commander
 
         static void RunCommand(string command)
         {
+            var split = command.Split(' ');
+
+            var method = RegisteredCommands[split[0]];
+
+            var parameters = method.GetParameters();
+
+            var bois = new object[parameters.Length];
+            for(int i = 0; i < parameters.Length; i++)
+            {
+                bois[i] = Parser.Parse("heck", parameters[i].ParameterType);
+            }
+
             throw new NotImplementedException();
         }
     }
+
+ 
 }
