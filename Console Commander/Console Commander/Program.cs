@@ -59,19 +59,18 @@ namespace ConsoleCommander
 
         static void RunCommand(string command)
         {
-            var split = command.Split(' ');
+            var split = new List<string>(command.Split(' '));
 
             var method = RegisteredCommands[split[0]];
+            split.RemoveAt(0);
 
             var parameters = method.GetParameters();
-
             var bois = new object[parameters.Length];
-            for(int i = 0; i < parameters.Length; i++)
-            {
-                bois[i] = Parser.Parse("heck", parameters[i].ParameterType);
-            }
 
-            throw new NotImplementedException();
+            for (int i = 0; i < split.Count; i++)
+                bois[i] = Parser.Parse(split[i], parameters[i].ParameterType);
+
+            method.Invoke(null, bois);
         }
     }
 
