@@ -61,6 +61,9 @@ namespace ConsoleCommander
         {
             var split = new List<string>(command.Split(' '));
 
+            if (!RegisteredCommands.ContainsKey(split[0]))
+                throw new Exception($"command '{split[0]}' not found");
+
             var method = RegisteredCommands[split[0]];
             split.RemoveAt(0);
 
