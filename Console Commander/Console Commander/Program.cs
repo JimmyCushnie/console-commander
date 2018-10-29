@@ -41,18 +41,21 @@ namespace ConsoleCommander
         {
             var methodFlags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
-            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+            foreach (Assembly ass in AppDomain.CurrentDomain.GetAssemblies())
             {
-                foreach (var method in type.GetMethods(methodFlags))
+                foreach (var type in ass.GetTypes())
                 {
-                    var attribute = Attribute.GetCustomAttribute(method, typeof(RegisterCommandAttribute)) as RegisterCommandAttribute;
+                    foreach (var method in type.GetMethods(methodFlags))
+                    {
+                        var attribute = Attribute.GetCustomAttribute(method, typeof(RegisterCommandAttribute)) as RegisterCommandAttribute;
 
-                    if (attribute == null) continue;
+                        if (attribute == null) continue;
 
-                    if (String.IsNullOrEmpty(attribute.Name))
-                        attribute.Name = method.Name;
+                        if (String.IsNullOrEmpty(attribute.Name))
+                            attribute.Name = method.Name;
 
-                    RegisteredCommands.Add(attribute.Name.ToLower(), method);
+                        RegisteredCommands.Add(attribute.Name.ToLower(), method);
+                    }
                 }
             }
         }
