@@ -11,7 +11,11 @@ namespace ConsoleCommander
         [RegisterCommand(help: "Lists all available commands")]
         static void Help()
         {
-            throw new NotImplementedException();
+            foreach(var boi in Program.RegisteredCommands)
+            {
+                var help = (Attribute.GetCustomAttribute(boi.Value, typeof(RegisterCommandAttribute)) as RegisterCommandAttribute).Help;
+                CC.WriteLine(string.Format("{0}: {1}", boi.Key.PadRight(16, ' '), help), ConsoleColor.Blue);
+            }
         }
 
         [RegisterCommand(help: "Exits the program")]
