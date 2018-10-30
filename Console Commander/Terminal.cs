@@ -63,6 +63,7 @@ namespace ConsoleCommander
         static void RunCommand(string command)
         {
             var split = new List<string>(command.Split(' '));
+            split[0] = split[0].ToLower(); // commands are not case sensitive
 
             if (!RegisteredCommands.ContainsKey(split[0]))
                 throw new Exception($"command '{split[0]}' not found");
@@ -72,6 +73,9 @@ namespace ConsoleCommander
 
             var parameters = method.GetParameters();
             var bois = new object[parameters.Length];
+
+            for (int i = 0; i < bois.Length; i++)
+                bois[i] = parameters[i].DefaultValue;
 
             for (int i = 0; i < split.Count; i++)
                 bois[i] = Parser.Parse(split[i], parameters[i].ParameterType);

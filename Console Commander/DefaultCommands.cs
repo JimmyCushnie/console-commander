@@ -8,7 +8,7 @@ namespace ConsoleCommander
 {
     static class DefaultCommands
     {
-        [RegisterCommand(help: "Lists all available commands")]
+        [RegisterCommand(help: "lists all available commands")]
         static void Help()
         {
             foreach(var boi in Terminal.RegisteredCommands)
@@ -18,7 +18,7 @@ namespace ConsoleCommander
             }
         }
 
-        [RegisterCommand(help: "Exits the program")]
+        [RegisterCommand(help: "exits the program")]
         static void Exit()
         {
             Environment.Exit(0);
