@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace ConsoleCommander
 {
-    class Program
+    class Terminal
     {
         static void Main(string[] args)
         {
