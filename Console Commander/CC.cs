@@ -11,6 +11,8 @@ namespace ConsoleCommander
     /// </summary>
     static class CC
     {
+        public static int IndentInterval = 3;
+
         public static void Write(object value, ConsoleColor color = ConsoleColor.Cyan)
         {
             var original = Console.ForegroundColor;
@@ -19,11 +21,11 @@ namespace ConsoleCommander
             Console.ForegroundColor = original;
         }
 
-        public static void WriteLine(object value, ConsoleColor color = ConsoleColor.Cyan)
+        public static void WriteLine(object value, ConsoleColor color = ConsoleColor.Cyan, int indent = 0)
         {
             var original = Console.ForegroundColor;
             Console.ForegroundColor = color;
-            Console.WriteLine(value);
+            Console.WriteLine(new string(' ', indent * IndentInterval) + value);
             Console.ForegroundColor = original;
         }
 
